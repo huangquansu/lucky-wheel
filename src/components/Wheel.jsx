@@ -1,4 +1,4 @@
-import react,{useState} from "react"
+import {useState} from "react"
 import "./App.css"
 
 function Wheel() {
@@ -59,10 +59,27 @@ function Wheel() {
 
     const extraRounds = 5 * 360;
 
-    const targetAngle =
-      360 - randomIndex * anglePerPrize - anglePerPrize / 2;
 
-    const newRotation = rotation + extraRounds + targetAngle;
+    // 每個獎項區塊的中心角度
+    const prizeCenterAngle =
+      randomIndex * anglePerPrize + anglePerPrize / 2;
+
+    // 讓該獎項中心對準上方指針
+    const targetRotation = (360 - prizeCenterAngle) % 360;
+
+    // 目前轉盤實際停留角度
+    const currentRotation = rotation % 360;
+
+    // 這次需要補轉的角度
+    const rotateMore =
+      (targetRotation - currentRotation + 360) % 360;
+
+    const newRotation = rotation + extraRounds + rotateMore;
+
+    // const targetAngle =
+    //   360 - randomIndex * anglePerPrize - anglePerPrize / 2;
+
+    // const newRotation = rotation + extraRounds + targetAngle;
 
     setRotation(newRotation);
 
