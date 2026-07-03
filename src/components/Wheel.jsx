@@ -61,8 +61,12 @@ function Wheel() {
 
 
     // 每個獎項區塊的中心角度
+    const safeRange = anglePerPrize * 0.35;
+
+    const randomOffset = (Math.random() - 0.5) * safeRange;
+
     const prizeCenterAngle =
-      randomIndex * anglePerPrize + anglePerPrize / 2;
+      randomIndex * anglePerPrize + anglePerPrize / 2 + randomOffset;
 
     // 讓該獎項中心對準上方指針
     const targetRotation = (360 - prizeCenterAngle) % 360;
